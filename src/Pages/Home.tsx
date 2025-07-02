@@ -1,13 +1,24 @@
 import { useNavigate } from "react-router-dom";
 
-
-export const Home=()=> {
+export const Home = () => {
   const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-[#F7F4ED] relative overflow-hidden">
+      {/* ✅ Multiple animated 📚 background icons (mobile only) */}
+      <div className="absolute inset-0 pointer-events-none lg:hidden">
+        {/* 1st 📚 */}
+        <div className="absolute top-10 left-1/4 text-5xl opacity-20 animate-float1">📚</div>
+        {/* 2nd 📚 */}
+        <div className="absolute top-1/3 right-1/4 text-6xl opacity-20 animate-float2">📚</div>
+        {/* 3rd 📚 */}
+        <div className="absolute bottom-20 left-1/3 text-4xl opacity-20 animate-float3">📚</div>
+        
+       
+      </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-6 py-20 lg:py-32">
+      {/* ✅ Main Content */}
+      <div className="container mx-auto px-6 py-20 lg:py-32 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-6">
@@ -17,20 +28,18 @@ export const Home=()=> {
                 stories & ideas
               </h1>
               <p className="text-xl lg:text-2xl text-gray-700 max-w-lg">
-                A place to read, write, and deepen your understanding
+                A place to read, write, and deepen your understanding..
               </p>
             </div>
             <button
               className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-full text-lg font-medium"
-                // onClick={() => window.location.href = "/signup"
-               onClick={() => navigate("/signup")}  
-                >
-            
+              onClick={() => navigate("/signup")}
+            >
               Start reading
             </button>
           </div>
 
-          {/* Abstract Illustration */}
+          {/* ✅ Abstract Illustration — unchanged */}
           <div className="relative lg:block hidden">
             <div className="relative w-full h-96">
               {/* Green organic shapes */}
@@ -62,6 +71,28 @@ export const Home=()=> {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+
+        .animate-float1 {
+          animation: float 4s ease-in-out infinite;
+          animation-delay: 0s;
+        }
+        .animate-float2 {
+          animation: float 5s ease-in-out infinite;
+          animation-delay: 1s;
+        }
+        .animate-float3 {
+          animation: float 6s ease-in-out infinite;
+          animation-delay: 0.5s;
+        }
+        
+       
+      `}</style>
     </div>
-  )
-}
+  );
+};
