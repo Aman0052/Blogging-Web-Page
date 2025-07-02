@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 export const Auth = ({type}:{type: "signup" | "signin"}) => {
+    const [loading, setLoading] = useState(false);
   
     const [postInputs,setpostInputs]= useState<SignupInput>({
         name: "",
@@ -20,6 +21,8 @@ async function sendRequest() {
     console.log("Post Inputs:", postInputs);
 
   try {
+    setLoading(true);
+    console.log("Sending request to backend...");
     const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type}`, postInputs);
     console.log("Full response:", response);
 
@@ -38,6 +41,8 @@ async function sendRequest() {
     alert(`An error occurred. Please try again.`);
     console.error("Error sending request:", err);
     throw new Error("Failed to send request");
+  }finally {
+    setLoading(false);
   }
 }
 
@@ -76,11 +81,16 @@ async function sendRequest() {
                 placeholder="Enter your Password"
                 onChange={(e) => setpostInputs({...postInputs, password: e.target.value})}
                 />
-            <button className="bg-black text-white w-[50%] px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300"
+            <button
+                className="bg-black text-white w-[50%] px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300 disabled:opacity-50"
             onClick={sendRequest}
-            >
-                {type === "signup" ? "Sign Up" : "Sign In"}
-            </button>
+            disabled={loading}   
+                    >
+                    {loading 
+                    ? "Please wait..." 
+                : (type === "signup" ? "Sign Up" : "Sign In")
+                    }
+     </button>
         </div>
     );
 }
