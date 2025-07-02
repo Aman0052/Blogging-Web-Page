@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export const Home=()=> {
   return (
     <div className="min-h-screen bg-[#F7F4ED] relative overflow-hidden">
@@ -16,12 +17,14 @@ export const Home=()=> {
                 A place to read, write, and deepen your understanding
               </p>
             </div>
+            <Link to="/signup">
             <button
               className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-full text-lg font-medium"
-                onClick={() => window.location.href = "/signup"}
+               }
             >
               Start reading
             </button>
+              </Link>
           </div>
 
           {/* Abstract Illustration */}
